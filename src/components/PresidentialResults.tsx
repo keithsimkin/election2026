@@ -3,9 +3,10 @@ import { TrendingUp, Users, Vote, Award } from "lucide-react";
 
 interface PresidentialResultsProps {
     highlightCandidate?: string;
+    onCandidateClick?: (candidateId: string) => void;
 }
 
-export function PresidentialResults({ highlightCandidate }: PresidentialResultsProps) {
+export function PresidentialResults({ highlightCandidate, onCandidateClick }: PresidentialResultsProps) {
     const { totalVotes, registeredVoters, turnout, candidates } = presidentialResults;
 
     return (
@@ -50,6 +51,7 @@ export function PresidentialResults({ highlightCandidate }: PresidentialResultsP
                         candidate={candidate}
                         rank={index + 1}
                         isHighlighted={highlightCandidate === candidate.id}
+                        onClick={() => onCandidateClick?.(candidate.id)}
                     />
                 ))}
             </ol>
@@ -61,20 +63,23 @@ interface CandidateCardProps {
     candidate: Candidate;
     rank: number;
     isHighlighted?: boolean;
+    onClick?: () => void;
 }
 
-function CandidateCard({ candidate, rank, isHighlighted }: CandidateCardProps) {
+function CandidateCard({ candidate, rank, isHighlighted, onClick }: CandidateCardProps) {
     const isWinner = rank === 1;
 
     return (
         <li
+            onClick={onClick}
             className={`
-        relative rounded-xl p-4 transition-all duration-300
+        relative rounded-xl p-4 transition-all duration-300 cursor-pointer
         ${isWinner
                     ? "bg-amber-50 border border-amber-200 shadow-sm"
                     : "bg-white border border-slate-200 hover:border-slate-300 hover:shadow-sm"
                 }
         ${isHighlighted ? "ring-2 ring-amber-500 ring-offset-2" : ""}
+        hover:scale-[1.02] active:scale-[0.98]
       `}
         >
             {/* Winner badge */}

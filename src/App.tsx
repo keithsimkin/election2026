@@ -10,13 +10,15 @@ import { Map as MapIcon, Crown, Building2, BarChart3 } from "lucide-react";
 type ViewMode = "presidential" | "parliamentary";
 type Tab = "map" | "president" | "parliament" | "stats";
 
-import { regions, districts, constituencyResults } from "@/data/electionData";
+import { districts, constituencyResults, presidentialCandidates } from "@/data/electionData";
 import { SeoHead } from "@/components/SeoHead";
+import { CandidateDetail } from "@/components/CandidateDetail";
 
 export function App() {
     const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
     const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
     const [selectedConstituency, setSelectedConstituency] = useState<string | null>(null);
+    const [selectedCandidate, setSelectedCandidate] = useState<string | null>(null);
     const [viewMode, setViewMode] = useState<ViewMode>("presidential");
     const [activeTab, setActiveTab] = useState<Tab>("map");
 
@@ -59,10 +61,6 @@ export function App() {
             const dist = districts.find(d => d.id === selectedDistrict);
             return dist ? `${dist.name} District Results` : "District Results";
         }
-        if (selectedRegion) {
-            const reg = regions.find(r => r.id === selectedRegion);
-            return reg ? `${reg.name} Results` : "Region Results";
-        }
         return "Uganda Elections 2026 Dashboard";
     };
 
@@ -74,10 +72,6 @@ export function App() {
         if (selectedDistrict) {
             const dist = districts.find(d => d.id === selectedDistrict);
             return dist ? `Detailed election results for ${dist.name} District, ${dist.region} Region. Winner: ${dist.presidentialWinner}. Turnout: ${dist.turnout}%.` : "District election results.";
-        }
-        if (selectedRegion) {
-            const reg = regions.find(r => r.id === selectedRegion);
-            return reg ? `Election results for ${reg.name}. Total votes: ${reg.totalVotes.toLocaleString()}. Participating districts: ${reg.districts.join(', ')}.` : "Region election results.";
         }
         return "Real-time visualization and analytics for the 2026 Uganda Presidential and Parliamentary elections. Explore interactive maps, region-wise data, and live results.";
     };
@@ -239,11 +233,20 @@ export function App() {
                                     onDistrictClick={handleDistrictClick}
                                     viewMode={viewMode}
                                 />
+                            ) : selectedCandidate ? (
+                                <CandidateDetail
+                                    candidate={presidentialCandidates.find(c => c.id === selectedCandidate)!}
+                                    onBack={() => setSelectedCandidate(null)}
+                                />
                             ) : (
                                 <div className="space-y-6">
                                     {/* Results components */}
                                     <div className={activeTab === "parliament" && viewMode === 'presidential' ? "hidden" : ""}>
-                                        {viewMode === "presidential" ? <PresidentialResults /> : <ParliamentaryResults />}
+                                        {viewMode === "presidential" ? (
+                                            <PresidentialResults onCandidateClick={setSelectedCandidate} />
+                                        ) : (
+                                            <ParliamentaryResults />
+                                        )}
                                     </div>
 
                                     {/* Quick Stats Cards */}

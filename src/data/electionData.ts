@@ -8,6 +8,10 @@ export interface Candidate {
   votes: number;
   percentage: number;
   image?: string;
+  bio?: string;
+  age?: number;
+  runningMate?: string;
+  manifesto?: string[];
 }
 
 export interface PresidentialResults {
@@ -112,6 +116,16 @@ export const presidentialCandidates: Candidate[] = [
     partyColor: partyColors.NRM,
     votes: 8239750,
     percentage: 71.65,
+    age: 81,
+    runningMate: "Jessica Alupo",
+    bio: "The incumbent president of Uganda since 1986. A former guerrilla leader who led the National Resistance Army to power. His campaign focuses on 'Securing Your Future' through industrialization and structural transformation.",
+    manifesto: [
+      "Securing the future of Ugandans",
+      "Wealth creation and jobs",
+      "Justice and Equity",
+      "Social Services delivery",
+      "Economic infrastructure development"
+    ]
   },
   {
     id: "kyagulanyi",
@@ -120,6 +134,16 @@ export const presidentialCandidates: Candidate[] = [
     partyColor: partyColors.NUP,
     votes: 2842800,
     percentage: 24.72,
+    age: 43,
+    runningMate: "Jeremiah Ken Lukyamuzi",
+    bio: "Popularly known as Bobi Wine, he is a musician-turned-politician. He leads the National Unity Platform (NUP). His campaign emphasizes 'The New Uganda' with a focus on human rights, governance reform, and youth empowerment.",
+    manifesto: [
+      "Rule of Law and Human Rights",
+      "Standardizing health care and education",
+      "Land ownership reforms",
+      "Job creation for the youth",
+      "Leveraging technology for development"
+    ]
   },
   {
     id: "mafabi",
@@ -657,6 +681,34 @@ export const constituencyResults: ConstituencyResult[] = [
       { candidateId: "tumukunde", votes: 569, percentage: 1.09 },
     ],
   },
+  {
+    id: "mukono-municipality",
+    name: "Mukono Municipality",
+    district: "mukono",
+    region: "central",
+    registeredVoters: 76543,
+    totalVotes: 42345,
+    turnout: 55.3,
+    winner: {
+      name: "Betty Nambooze Bakireke",
+      party: "NUP",
+      partyColor: partyColors.NUP,
+      votes: 28765,
+      percentage: 67.93,
+    },
+    candidates: [
+      { name: "Betty Nambooze Bakireke", party: "NUP", partyColor: partyColors.NUP, votes: 28765, percentage: 67.93 },
+      { name: "Abbas Ssozi", party: "NRM", partyColor: partyColors.NRM, votes: 11234, percentage: 26.53 },
+      { name: "Others", party: "IND", partyColor: partyColors.IND, votes: 2346, percentage: 5.54 },
+    ],
+    presidentialResults: [
+      { candidateId: "kyagulanyi", votes: 31245, percentage: 73.79 },
+      { candidateId: "museveni", votes: 8765, percentage: 20.70 },
+      { candidateId: "muntu", votes: 1234, percentage: 2.91 },
+      { candidateId: "mao", votes: 678, percentage: 1.60 },
+      { candidateId: "tumukunde", votes: 423, percentage: 1.00 },
+    ],
+  },
 ];
 
 // Parliamentary seats summary by party
@@ -823,6 +875,58 @@ export const pollingStations: PollingStationResult[] = [
       { name: "James Okello", party: "NRM", votes: 250, percentage: 41.7 },
       { name: "Charles Musoke", party: "NUP", votes: 80, percentage: 13.3 },
       { name: "Others", party: "IND", votes: 20, percentage: 3.3 },
+    ],
+  },
+  {
+    id: "ps-muk-001",
+    name: "028 Lweza Primary School (NAM-NDA)",
+    constituencyId: "mukono-municipality",
+    registeredVoters: 200,
+    totalVotes: 132,
+    turnout: 66.0,
+    presidentialResults: [
+      { candidateId: "kyagulanyi", votes: 94, percentage: 71.2 },
+      { candidateId: "museveni", votes: 37, percentage: 28.0 },
+      { candidateId: "kabinga", votes: 1, percentage: 0.8 },
+    ],
+    mpResults: [
+      { name: "Betty Nambooze Bakireke", party: "NUP", votes: 100, percentage: 75.8 },
+      { name: "Abbas Ssozi", party: "NRM", votes: 32, percentage: 24.2 },
+    ],
+  },
+  {
+    id: "ps-muk-002",
+    name: "Polling Station 029 (Parish 017)",
+    constituencyId: "mukono-municipality",
+    registeredVoters: 250,
+    totalVotes: 136,
+    turnout: 54.4,
+    presidentialResults: [
+      { candidateId: "kyagulanyi", votes: 91, percentage: 66.9 },
+      { candidateId: "museveni", votes: 45, percentage: 33.1 },
+    ],
+    mpResults: [
+      { name: "Betty Nambooze Bakireke", party: "NUP", votes: 95, percentage: 69.9 },
+      { name: "Abbas Ssozi", party: "NRM", votes: 41, percentage: 30.1 },
+    ],
+  },
+  {
+    id: "ps-muk-003",
+    name: "Polling Station 030 (Ntawo Ward)",
+    constituencyId: "mukono-municipality",
+    registeredVoters: 300,
+    totalVotes: 144,
+    turnout: 48.0,
+    presidentialResults: [
+      { candidateId: "kyagulanyi", votes: 105, percentage: 72.9 },
+      { candidateId: "museveni", votes: 36, percentage: 25.0 },
+      { candidateId: "mafabi", votes: 1, percentage: 0.7 },
+      { candidateId: "muntu", votes: 1, percentage: 0.7 },
+      { candidateId: "sserunga", votes: 1, percentage: 0.7 },
+    ],
+    mpResults: [
+      { name: "Betty Nambooze Bakireke", party: "NUP", votes: 110, percentage: 76.4 },
+      { name: "Abbas Ssozi", party: "NRM", votes: 34, percentage: 23.6 },
     ],
   },
 ];
