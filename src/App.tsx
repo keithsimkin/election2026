@@ -3,41 +3,58 @@ import { UgandaMap } from "@/components/UgandaMap";
 import ugFlag from "@/assets/uganda-flag.svg";
 import { PresidentialResults } from "@/components/PresidentialResults";
 import { ParliamentaryResults } from "@/components/ParliamentaryResults";
-import { RegionDetail, DistrictDetail } from "@/components/RegionDetail";
+import { RegionDetail, DistrictDetail, ConstituencyDetail } from "@/components/RegionDetail";
 import { partyColors } from "@/data/electionData";
 import { Map as MapIcon, Crown, Building2, BarChart3 } from "lucide-react";
 
 type ViewMode = "presidential" | "parliamentary";
 type Tab = "map" | "president" | "parliament" | "stats";
 
-import { regions, districts } from "@/data/electionData";
+import { regions, districts, constituencyResults } from "@/data/electionData";
 import { SeoHead } from "@/components/SeoHead";
 
 export function App() {
     const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
     const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
+    const [selectedConstituency, setSelectedConstituency] = useState<string | null>(null);
     const [viewMode, setViewMode] = useState<ViewMode>("presidential");
     const [activeTab, setActiveTab] = useState<Tab>("map");
 
     const handleRegionClick = (regionId: string) => {
         setSelectedRegion(regionId);
         setSelectedDistrict(null);
+        setSelectedConstituency(null);
     };
 
     const handleDistrictClick = (districtId: string) => {
         setSelectedDistrict(districtId);
+        setSelectedConstituency(null);
+    };
+
+    const handleConstituencyClick = (constituencyId: string) => {
+        setSelectedConstituency(constituencyId);
     };
 
     const handleCloseDetail = () => {
         setSelectedRegion(null);
         setSelectedDistrict(null);
+        setSelectedConstituency(null);
     };
 
     const handleBackToRegion = () => {
         setSelectedDistrict(null);
+        setSelectedConstituency(null);
+    };
+
+    const handleBackToDistrict = () => {
+        setSelectedConstituency(null);
     };
 
     const getPageTitle = () => {
+        if (selectedConstituency) {
+            const consti = constituencyResults.find(c => c.id === selectedConstituency);
+            return consti ? `${consti.name} Results` : "Constituency Results";
+        }
         if (selectedDistrict) {
             const dist = districts.find(d => d.id === selectedDistrict);
             return dist ? `${dist.name} District Results` : "District Results";
@@ -50,6 +67,10 @@ export function App() {
     };
 
     const getPageDescription = () => {
+        if (selectedConstituency) {
+            const consti = constituencyResults.find(c => c.id === selectedConstituency);
+            return consti ? `Election results for ${consti.name}. Winner: ${consti.winner.name} (${consti.winner.party}).` : "Constituency election results.";
+        }
         if (selectedDistrict) {
             const dist = districts.find(d => d.id === selectedDistrict);
             return dist ? `Detailed election results for ${dist.name} District, ${dist.region} Region. Winner: ${dist.presidentialWinner}. Turnout: ${dist.turnout}%.` : "District election results.";
@@ -196,17 +217,27 @@ export function App() {
                     <div className={`flex flex-col h-full overflow-hidden ${activeTab !== "president" && activeTab !== "parliament" && activeTab !== "stats" && activeTab !== "map" ? "hidden lg:flex" : ""} ${activeTab === "map" ? "hidden lg:flex" : ""}`}>
                         {/* Show detail panels when region/district selected */}
                         <div className="h-full overflow-y-auto pr-1 pb-2 custom-scrollbar space-y-4">
-                            {selectedDistrict ? (
+                            {selectedConstituency ? (
+                                <ConstituencyDetail
+                                    constituencyId={selectedConstituency}
+                                    onClose={handleCloseDetail}
+                                    onBack={handleBackToDistrict}
+                                    viewMode={viewMode}
+                                />
+                            ) : selectedDistrict ? (
                                 <DistrictDetail
                                     districtId={selectedDistrict}
                                     onClose={handleCloseDetail}
                                     onBack={handleBackToRegion}
+                                    onConstituencyClick={handleConstituencyClick}
+                                    viewMode={viewMode}
                                 />
                             ) : selectedRegion ? (
                                 <RegionDetail
                                     regionId={selectedRegion}
                                     onClose={handleCloseDetail}
                                     onDistrictClick={handleDistrictClick}
+                                    viewMode={viewMode}
                                 />
                             ) : (
                                 <div className="space-y-6">

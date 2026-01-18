@@ -25,6 +25,27 @@ export interface MPResult {
   percentage: number;
 }
 
+export interface PollingStationResult {
+  id: string;
+  name: string;
+  constituencyId: string;
+  registeredVoters: number;
+  totalVotes: number;
+  turnout: number;
+  presidentialResults: {
+    candidateId: string;
+    votes: number;
+    percentage: number;
+  }[];
+  mpResults: {
+    name: string;
+    votes: number;
+    percentage: number;
+    party: string;
+  }[];
+  issues?: string[]; // e.g. "Late opening", "BVV failure"
+}
+
 export interface ConstituencyResult {
   id: string;
   name: string;
@@ -675,7 +696,139 @@ export function getRegionWinner(regionId: string): string {
   return winner;
 }
 
+// Sample Polling Station Results (focused on Kampala Central for demo)
+export const pollingStations: PollingStationResult[] = [
+  {
+    id: "ps-kc-001",
+    name: "Nakasero Primary School A-M",
+    constituencyId: "kampala-central",
+    registeredVoters: 1200,
+    totalVotes: 850,
+    turnout: 70.83,
+    presidentialResults: [
+      { candidateId: "kyagulanyi", votes: 450, percentage: 52.9 },
+      { candidateId: "museveni", votes: 350, percentage: 41.2 },
+      { candidateId: "muntu", votes: 30, percentage: 3.5 },
+      { candidateId: "mao", votes: 15, percentage: 1.8 },
+      { candidateId: "tumukunde", votes: 5, percentage: 0.6 },
+    ],
+    mpResults: [
+      { name: "Muhammad Nsereko", party: "IND", votes: 400, percentage: 47.0 },
+      { name: "Charles Musoke", party: "NUP", votes: 300, percentage: 35.3 },
+      { name: "James Okello", party: "NRM", votes: 100, percentage: 11.8 },
+      { name: "Others", party: "IND", votes: 50, percentage: 5.9 },
+    ],
+  },
+  {
+    id: "ps-kc-002",
+    name: "Nakasero Primary School N-Z",
+    constituencyId: "kampala-central",
+    registeredVoters: 1150,
+    totalVotes: 800,
+    turnout: 69.56,
+    presidentialResults: [
+      { candidateId: "kyagulanyi", votes: 420, percentage: 52.5 },
+      { candidateId: "museveni", votes: 340, percentage: 42.5 },
+      { candidateId: "muntu", votes: 25, percentage: 3.1 },
+      { candidateId: "mao", votes: 10, percentage: 1.25 },
+      { candidateId: "tumukunde", votes: 5, percentage: 0.6 },
+    ],
+    mpResults: [
+      { name: "Muhammad Nsereko", party: "IND", votes: 380, percentage: 47.5 },
+      { name: "Charles Musoke", party: "NUP", votes: 290, percentage: 36.2 },
+      { name: "James Okello", party: "NRM", votes: 90, percentage: 11.2 },
+      { name: "Others", party: "IND", votes: 40, percentage: 5.0 },
+    ],
+  },
+  {
+    id: "ps-kc-003",
+    name: "City Hall A",
+    constituencyId: "kampala-central",
+    registeredVoters: 900,
+    totalVotes: 600,
+    turnout: 66.67,
+    presidentialResults: [
+      { candidateId: "kyagulanyi", votes: 350, percentage: 58.3 },
+      { candidateId: "museveni", votes: 200, percentage: 33.3 },
+      { candidateId: "muntu", votes: 30, percentage: 5.0 },
+      { candidateId: "mao", votes: 15, percentage: 2.5 },
+      { candidateId: "tumukunde", votes: 5, percentage: 0.8 },
+    ],
+    mpResults: [
+      { name: "Muhammad Nsereko", party: "IND", votes: 250, percentage: 41.6 },
+      { name: "Charles Musoke", party: "NUP", votes: 240, percentage: 40.0 },
+      { name: "James Okello", party: "NRM", votes: 80, percentage: 13.3 },
+      { name: "Others", party: "IND", votes: 30, percentage: 5.0 },
+    ],
+  },
+  {
+    id: "ps-kc-004",
+    name: "Railway Station Grounds",
+    constituencyId: "kampala-central",
+    registeredVoters: 1500,
+    totalVotes: 950,
+    turnout: 63.33,
+    presidentialResults: [
+      { candidateId: "kyagulanyi", votes: 600, percentage: 63.1 },
+      { candidateId: "museveni", votes: 250, percentage: 26.3 },
+      { candidateId: "muntu", votes: 60, percentage: 6.3 },
+      { candidateId: "mao", votes: 30, percentage: 3.1 },
+      { candidateId: "tumukunde", votes: 10, percentage: 1.0 },
+    ],
+    mpResults: [
+      { name: "Muhammad Nsereko", party: "IND", votes: 400, percentage: 42.1 },
+      { name: "Charles Musoke", party: "NUP", votes: 350, percentage: 36.8 },
+      { name: "James Okello", party: "NRM", votes: 150, percentage: 15.8 },
+      { name: "Others", party: "IND", votes: 50, percentage: 5.3 },
+    ],
+    issues: ["Biometric Verification Delay"],
+  },
+  {
+    id: "ps-kc-005",
+    name: "Kamwokya Market A",
+    constituencyId: "kampala-central",
+    registeredVoters: 2000,
+    totalVotes: 1400,
+    turnout: 70.0,
+    presidentialResults: [
+      { candidateId: "kyagulanyi", votes: 1100, percentage: 78.5 },
+      { candidateId: "museveni", votes: 200, percentage: 14.3 },
+      { candidateId: "muntu", votes: 60, percentage: 4.3 },
+      { candidateId: "mao", votes: 30, percentage: 2.1 },
+      { candidateId: "tumukunde", votes: 10, percentage: 0.7 },
+    ],
+    mpResults: [
+      { name: "Muhammad Nsereko", party: "IND", votes: 500, percentage: 35.7 },
+      { name: "Charles Musoke", party: "NUP", votes: 700, percentage: 50.0 },
+      { name: "James Okello", party: "NRM", votes: 100, percentage: 7.1 },
+      { name: "Others", party: "IND", votes: 100, percentage: 7.1 },
+    ],
+  },
+  {
+    id: "ps-kc-006",
+    name: "Kololo Airstrip",
+    constituencyId: "kampala-central",
+    registeredVoters: 800,
+    totalVotes: 600,
+    turnout: 75.0,
+    presidentialResults: [
+      { candidateId: "museveni", votes: 450, percentage: 75.0 },
+      { candidateId: "kyagulanyi", votes: 100, percentage: 16.7 },
+      { candidateId: "muntu", votes: 30, percentage: 5.0 },
+      { candidateId: "mao", votes: 15, percentage: 2.5 },
+      { candidateId: "tumukunde", votes: 5, percentage: 0.8 },
+    ],
+    mpResults: [
+      { name: "Muhammad Nsereko", party: "IND", votes: 250, percentage: 41.7 },
+      { name: "James Okello", party: "NRM", votes: 250, percentage: 41.7 },
+      { name: "Charles Musoke", party: "NUP", votes: 80, percentage: 13.3 },
+      { name: "Others", party: "IND", votes: 20, percentage: 3.3 },
+    ],
+  },
+];
+
 // Get candidate by ID
 export function getCandidateById(id: string): Candidate | undefined {
   return presidentialCandidates.find(c => c.id === id);
 }
+
