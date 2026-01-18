@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { UgandaMap } from "@/components/UgandaMap";
+import ugFlag from "@/assets/uganda-flag.svg";
 import { PresidentialResults } from "@/components/PresidentialResults";
 import { ParliamentaryResults } from "@/components/ParliamentaryResults";
 import { RegionDetail, DistrictDetail } from "@/components/RegionDetail";
@@ -49,14 +50,12 @@ export function App() {
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
                             {/* Uganda Flag colors indicator */}
-                            <div className="flex flex-col h-6 w-9 rounded-sm overflow-hidden ring-1 ring-black/10 shadow-sm">
-                                <div className="w-full flex-1 bg-black" />
-                                <div className="w-full flex-1 bg-yellow-400" />
-                                <div className="w-full flex-1 bg-red-600" />
-                                <div className="w-full flex-1 bg-black" />
-                                <div className="w-full flex-1 bg-yellow-400" />
-                                <div className="w-full flex-1 bg-red-600" />
-                            </div>
+                            {/* Uganda Flag */}
+                            <img
+                                src={ugFlag}
+                                alt="Uganda Flag"
+                                className="h-6 w-9 rounded-sm object-cover shadow-sm ring-1 ring-black/10"
+                            />
                             <div>
                                 <h1 className="text-xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
                                     Uganda Elections 2026
@@ -208,14 +207,11 @@ export function App() {
                 <div className="max-w-7xl mx-auto px-4 py-6">
                     <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                         <div className="flex items-center gap-2">
-                            <div className="flex flex-col h-4 w-6 rounded-sm overflow-hidden ring-1 ring-black/10">
-                                <div className="w-full flex-1 bg-black" />
-                                <div className="w-full flex-1 bg-yellow-400" />
-                                <div className="w-full flex-1 bg-red-600" />
-                                <div className="w-full flex-1 bg-black" />
-                                <div className="w-full flex-1 bg-yellow-400" />
-                                <div className="w-full flex-1 bg-red-600" />
-                            </div>
+                            <img
+                                src={ugFlag}
+                                alt="Uganda Flag"
+                                className="h-4 w-6 rounded-sm object-cover ring-1 ring-black/10"
+                            />
                             <span className="text-slate-500 text-sm">Uganda Elections 2026 Dashboard</span>
                         </div>
                         <p className="text-slate-500 text-sm">
