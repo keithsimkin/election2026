@@ -75,6 +75,10 @@ export const partyColors: Record<string, string> = {
   DP: "#22C55E",
   UPC: "#F97316",
   ANT: "#8B5CF6",
+  RPP: "#EC4899", // Pink
+  NPP: "#14B8A6", // Teal
+  CMP: "#A855F7", // Purple
+  CP: "#6366F1", // Indigo
   IND: "#6B7280",
 };
 
@@ -85,47 +89,71 @@ export const presidentialCandidates: Candidate[] = [
     name: "Yoweri Kaguta Museveni",
     party: "NRM",
     partyColor: partyColors.NRM,
-    votes: 6042898,
-    percentage: 58.64,
+    votes: 8239750,
+    percentage: 71.65,
   },
   {
     id: "kyagulanyi",
     name: "Robert Kyagulanyi Ssentamu",
     party: "NUP",
     partyColor: partyColors.NUP,
-    votes: 3475298,
-    percentage: 33.73,
+    votes: 2842800,
+    percentage: 24.72,
+  },
+  {
+    id: "mafabi",
+    name: "Nathan Nandala Mafabi",
+    party: "FDC",
+    partyColor: partyColors.FDC,
+    votes: 216200,
+    percentage: 1.88,
   },
   {
     id: "muntu",
     name: "Mugisha Muntu",
     party: "ANT",
     partyColor: partyColors.ANT,
-    votes: 380954,
-    percentage: 3.70,
+    votes: 60950,
+    percentage: 0.53,
   },
   {
-    id: "mao",
-    name: "Nobert Mao",
-    party: "DP",
-    partyColor: partyColors.DP,
-    votes: 204891,
-    percentage: 1.99,
+    id: "kabinga",
+    name: "Frank Bulira Kabinga",
+    party: "RPP",
+    partyColor: partyColors.RPP,
+    votes: 47150,
+    percentage: 0.41,
   },
   {
-    id: "tumukunde",
-    name: "Henry Tumukunde",
-    party: "IND",
-    partyColor: partyColors.IND,
-    votes: 200125,
-    percentage: 1.94,
+    id: "kasibante",
+    name: "Robert Kasibante",
+    party: "NPP",
+    partyColor: partyColors.NPP,
+    votes: 34500,
+    percentage: 0.30,
+  },
+  {
+    id: "sserunga",
+    name: "Munyagwa Mubarak Sserunga",
+    party: "CMP",
+    partyColor: partyColors.CMP,
+    votes: 33350,
+    percentage: 0.29,
+  },
+  {
+    id: "mabirizi",
+    name: "Elton Joseph Mabirizi",
+    party: "CP",
+    partyColor: partyColors.CP,
+    votes: 24150,
+    percentage: 0.21,
   },
 ];
 
 export const presidentialResults: PresidentialResults = {
-  totalVotes: 10304166,
+  totalVotes: 11500000,
   registeredVoters: 18103603,
-  turnout: 56.92,
+  turnout: 63.52,
   candidates: presidentialCandidates,
 };
 
@@ -628,13 +656,13 @@ export const parliamentarySummary = {
 export function getRegionWinner(regionId: string): string {
   const regionDistricts = districts.filter(d => d.region === regionId);
   const totals: Record<string, number> = {};
-  
+
   regionDistricts.forEach(district => {
     district.presidentialResults.forEach(result => {
       totals[result.candidateId] = (totals[result.candidateId] || 0) + result.votes;
     });
   });
-  
+
   let maxVotes = 0;
   let winner = "";
   Object.entries(totals).forEach(([candidateId, votes]) => {
@@ -643,7 +671,7 @@ export function getRegionWinner(regionId: string): string {
       winner = candidateId;
     }
   });
-  
+
   return winner;
 }
 
