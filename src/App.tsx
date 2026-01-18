@@ -204,19 +204,36 @@ export function App() {
 
             {/* Footer */}
             <footer className="relative z-10 border-t border-slate-200 bg-slate-50 mt-12">
-                <div className="max-w-7xl mx-auto px-4 py-6">
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="max-w-7xl mx-auto px-4 py-8">
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
                         <div className="flex items-center gap-2">
                             <img
                                 src={ugFlag}
                                 alt="Uganda Flag"
-                                className="h-4 w-6 rounded-sm object-cover ring-1 ring-black/10"
+                                className="h-5 w-8 rounded-sm object-cover ring-1 ring-black/10 shadow-sm"
                             />
-                            <span className="text-slate-500 text-sm">Uganda Elections 2026 Dashboard</span>
+                            <span className="text-slate-600 font-medium text-sm">Uganda Elections 2026 Dashboard</span>
                         </div>
-                        <p className="text-slate-500 text-sm">
-                            Data for demonstration purposes only
-                        </p>
+                        <div className="text-right">
+                            <p className="text-slate-500 text-sm">
+                                developed by <span className="font-semibold text-slate-700">+256757474824</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Disclaimer Section */}
+                    <div className="pt-6 border-t border-slate-200">
+                        <div className="max-w-3xl mx-auto text-center space-y-2">
+                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                                Official Disclaimer
+                            </p>
+                            <p className="text-xs text-slate-500 leading-relaxed">
+                                This platform is a technological demonstration and <strong>does not represent official election results</strong>.
+                                All data visualization, including vote counts, percentages, and district mapping, utilizes simulated datasets for development and testing purposes.
+                                This tool is not affiliated with the Independent Electoral Commission (IEC) of Uganda.
+                                For official results, please refer exclusively to authorized government channels.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </footer>
