@@ -59,9 +59,12 @@ export function ParliamentaryResults() {
                             const x2 = centerX + radius * Math.cos(endRad);
                             const y2 = centerY - radius * Math.sin(endRad);
 
-                            const largeArcFlag = seatAngle > 90 ? 1 : 0;
+                            // For a hemicycle, the max angle is 180, so segments are always < 180 deg
+                            // unless a single party has > 100% (impossible).
+                            // Thus largeArcFlag is always 0.
+                            const largeArcFlag = 0;
 
-                            const pathD = `M ${x1} ${y1} A ${radius} ${radius} 0 ${largeArcFlag} 0 ${x2} ${y2}`;
+                            const pathD = `M ${x1} ${y1} A ${radius} ${radius} 0 ${largeArcFlag} 1 ${x2} ${y2}`;
 
                             const result = (
                                 <path

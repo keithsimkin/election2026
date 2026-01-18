@@ -49,13 +49,13 @@ export function App() {
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
                             {/* Uganda Flag colors indicator */}
-                            <div className="flex gap-0.5 h-6 shadow-sm">
-                                <div className="w-1.5 h-full bg-black rounded-l-sm" />
-                                <div className="w-1.5 h-full bg-yellow-400" />
-                                <div className="w-1.5 h-full bg-red-600" />
-                                <div className="w-1.5 h-full bg-black" />
-                                <div className="w-1.5 h-full bg-yellow-400" />
-                                <div className="w-1.5 h-full bg-red-600 rounded-r-sm" />
+                            <div className="flex flex-col h-6 w-9 rounded-sm overflow-hidden ring-1 ring-black/10 shadow-sm">
+                                <div className="w-full flex-1 bg-black" />
+                                <div className="w-full flex-1 bg-yellow-400" />
+                                <div className="w-full flex-1 bg-red-600" />
+                                <div className="w-full flex-1 bg-black" />
+                                <div className="w-full flex-1 bg-yellow-400" />
+                                <div className="w-full flex-1 bg-red-600" />
                             </div>
                             <div>
                                 <h1 className="text-xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
@@ -208,13 +208,13 @@ export function App() {
                 <div className="max-w-7xl mx-auto px-4 py-6">
                     <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                         <div className="flex items-center gap-2">
-                            <div className="flex gap-0.5">
-                                <div className="w-1.5 h-4 bg-black rounded-l-sm" />
-                                <div className="w-1.5 h-4 bg-yellow-400" />
-                                <div className="w-1.5 h-4 bg-red-600" />
-                                <div className="w-1.5 h-4 bg-black" />
-                                <div className="w-1.5 h-4 bg-yellow-400" />
-                                <div className="w-1.5 h-4 bg-red-600 rounded-r-sm" />
+                            <div className="flex flex-col h-4 w-6 rounded-sm overflow-hidden ring-1 ring-black/10">
+                                <div className="w-full flex-1 bg-black" />
+                                <div className="w-full flex-1 bg-yellow-400" />
+                                <div className="w-full flex-1 bg-red-600" />
+                                <div className="w-full flex-1 bg-black" />
+                                <div className="w-full flex-1 bg-yellow-400" />
+                                <div className="w-full flex-1 bg-red-600" />
                             </div>
                             <span className="text-slate-500 text-sm">Uganda Elections 2026 Dashboard</span>
                         </div>
