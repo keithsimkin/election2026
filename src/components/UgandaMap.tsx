@@ -1,6 +1,6 @@
-import { useState, useMemo } from "react";
-import { regions, districts, getCandidateById, partyColors } from "@/data/electionData";
-import mapDataRaw from "@/data/ugandaMap.json";
+import { useState } from "react";
+import { districts, getCandidateById, partyColors } from "../data/electionData";
+import mapDataRaw from "../data/ugandaMap.json";
 
 // Type the imported JSON data
 interface MapPath {
@@ -20,7 +20,7 @@ interface UgandaMapProps {
 }
 
 export function UgandaMap({ onRegionClick, onDistrictClick, selectedRegion, viewMode }: UgandaMapProps) {
-    const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
+    const [, setHoveredRegion] = useState<string | null>(null);
     const [hoveredDistrict, setHoveredDistrict] = useState<string | null>(null);
 
     // Helper to normalize names for matching
@@ -46,7 +46,7 @@ export function UgandaMap({ onRegionClick, onDistrictClick, selectedRegion, view
 
     // Get color for a region (group of districts)
     const getRegionColor = (regionName: string) => {
-        const regionId = regionName.toLowerCase();
+        // regionName is used directly below
 
         // Calculate winner from our data for this region
         // This is calculating dynamically based on the component's region prop which is just a string from the map
@@ -101,9 +101,6 @@ export function UgandaMap({ onRegionClick, onDistrictClick, selectedRegion, view
                 <g>
                     {mapData.map((path) => {
                         // Determine if this path should be highlighted/visible based on selection
-                        const isSelectedRegion = selectedRegion
-                            ? path.region === selectedRegion
-                            : true;
 
                         // If we have a region selected, and this isn't in it, fade it out
                         const opacity = selectedRegion && path.region !== selectedRegion ? 0.1 : 1;

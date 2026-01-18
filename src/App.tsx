@@ -4,7 +4,7 @@ import { PresidentialResults } from "@/components/PresidentialResults";
 import { ParliamentaryResults } from "@/components/ParliamentaryResults";
 import { RegionDetail, DistrictDetail } from "@/components/RegionDetail";
 import { partyColors } from "@/data/electionData";
-import { Map as MapIcon, Crown, Building2, BarChart3, Info } from "lucide-react";
+import { Map as MapIcon, Crown, Building2, BarChart3 } from "lucide-react";
 
 type ViewMode = "presidential" | "parliamentary";
 type Tab = "map" | "president" | "parliament" | "stats";
