@@ -86,9 +86,9 @@ export function RegionDetail({ regionId, onClose, onDistrictClick }: RegionDetai
             {/* Regional Presidential Results */}
             <div className="p-4 border-b border-slate-100">
                 <h3 className="text-slate-400 font-semibold mb-3 text-xs uppercase tracking-wide">Regional Results</h3>
-                <div className="space-y-2">
+                <ol className="space-y-2 list-none m-0">
                     {regionalResults.slice(0, 3).map((result, index) => (
-                        <div key={result.candidateId} className="flex items-center gap-3">
+                        <li key={result.candidateId} className="flex items-center gap-3">
                             <div
                                 className={`w-6 h-6 rounded-md flex items-center justify-center text-xs font-bold text-white`}
                                 style={{ backgroundColor: result.candidate?.partyColor }}
@@ -107,34 +107,35 @@ export function RegionDetail({ regionId, onClose, onDistrictClick }: RegionDetai
                                     />
                                 </div>
                             </div>
-                        </div>
+                        </li>
                     ))}
-                </div>
+                </ol>
             </div>
 
             {/* Districts list */}
             <div className="p-4 flex-1 overflow-hidden flex flex-col">
                 <h3 className="text-slate-400 font-semibold mb-3 text-xs uppercase tracking-wide">Districts</h3>
-                <div className="space-y-2 overflow-y-auto custom-scrollbar pr-1">
+                <ul className="space-y-2 overflow-y-auto custom-scrollbar pr-1 list-none m-0">
                     {regionDistricts.map(district => {
                         const winner = getCandidateById(district.presidentialWinner);
                         return (
-                            <button
-                                key={district.id}
-                                onClick={() => onDistrictClick(district.id)}
-                                className="w-full flex items-center gap-3 p-3 bg-slate-50 hover:bg-white border border-transparent hover:border-slate-200 rounded-xl transition-all group text-left"
-                            >
-                                <div
-                                    className="w-2.5 h-2.5 rounded-full ring-2 ring-white shadow-sm"
-                                    style={{ backgroundColor: winner?.partyColor }}
-                                />
-                                <span className="text-slate-700 font-medium flex-1">{district.name}</span>
-                                <span className="text-slate-400 text-xs">{district.turnout.toFixed(1)}%</span>
-                                <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-slate-500 transition-colors" />
-                            </button>
+                            <li key={district.id}>
+                                <button
+                                    onClick={() => onDistrictClick(district.id)}
+                                    className="w-full flex items-center gap-3 p-3 bg-slate-50 hover:bg-white border border-transparent hover:border-slate-200 rounded-xl transition-all group text-left"
+                                >
+                                    <div
+                                        className="w-2.5 h-2.5 rounded-full ring-2 ring-white shadow-sm"
+                                        style={{ backgroundColor: winner?.partyColor }}
+                                    />
+                                    <span className="text-slate-700 font-medium flex-1">{district.name}</span>
+                                    <span className="text-slate-400 text-xs">{district.turnout.toFixed(1)}%</span>
+                                    <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-slate-500 transition-colors" />
+                                </button>
+                            </li>
                         );
                     })}
-                </div>
+                </ul>
             </div>
         </div>
     );
@@ -202,11 +203,11 @@ export function DistrictDetail({ districtId, onClose, onBack }: DistrictDetailPr
             {/* Presidential Results */}
             <div className="p-4 border-b border-slate-100">
                 <h3 className="text-slate-400 font-semibold mb-3 text-xs uppercase tracking-wide">Presidential Results</h3>
-                <div className="space-y-2">
+                <ol className="space-y-2 list-none m-0">
                     {district.presidentialResults.map((result, index) => {
                         const candidate = getCandidateById(result.candidateId);
                         return (
-                            <div key={result.candidateId} className="flex items-center gap-3">
+                            <li key={result.candidateId} className="flex items-center gap-3">
                                 <div
                                     className={`w-6 h-6 rounded-md flex items-center justify-center text-xs font-bold text-white`}
                                     style={{ backgroundColor: candidate?.partyColor }}
@@ -221,19 +222,19 @@ export function DistrictDetail({ districtId, onClose, onBack }: DistrictDetailPr
                                     <p className="text-slate-900 font-bold text-sm">{result.percentage.toFixed(1)}%</p>
                                     <p className="text-slate-400 text-[10px]">{result.votes.toLocaleString()}</p>
                                 </div>
-                            </div>
+                            </li>
                         );
                     })}
-                </div>
+                </ol>
             </div>
 
             {/* Constituencies */}
             {districtConstituencies.length > 0 && (
                 <div className="p-4 bg-slate-50/50">
                     <h3 className="text-slate-400 font-semibold mb-3 text-xs uppercase tracking-wide">Constituencies</h3>
-                    <div className="space-y-3">
+                    <ul className="space-y-3 list-none m-0">
                         {districtConstituencies.map(constituency => (
-                            <div
+                            <li
                                 key={constituency.id}
                                 className="p-3 bg-white border border-slate-200/60 rounded-xl shadow-sm"
                             >
@@ -254,9 +255,9 @@ export function DistrictDetail({ districtId, onClose, onBack }: DistrictDetailPr
                                     <span>{constituency.winner.name}</span>
                                     <span className="font-bold text-slate-700">{constituency.winner.percentage.toFixed(1)}%</span>
                                 </p>
-                            </div>
+                            </li>
                         ))}
-                    </div>
+                    </ul>
                 </div>
             )}
         </div>

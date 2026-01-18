@@ -176,6 +176,9 @@ export function UgandaMap({ onRegionClick, onDistrictClick, selectedRegion, view
 
                 {/* Compass/North Arrow - simplified or just text */}
                 <text x="900" y="900" className="text-4xl font-bold fill-slate-300 select-none">N</text>
+
+                <title>Interactive Map of Uganda Election Results 2026</title>
+                <desc>A map showing voting districts of Uganda, color-coded by the winning presidential party.</desc>
             </svg>
 
             {/* Tooltip */}

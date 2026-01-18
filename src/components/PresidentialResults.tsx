@@ -43,7 +43,7 @@ export function PresidentialResults({ highlightCandidate }: PresidentialResultsP
             </div>
 
             {/* Candidates list */}
-            <div className="p-4 space-y-3">
+            <ol className="p-4 space-y-3 list-none m-0">
                 {candidates.map((candidate, index) => (
                     <CandidateCard
                         key={candidate.id}
@@ -52,7 +52,7 @@ export function PresidentialResults({ highlightCandidate }: PresidentialResultsP
                         isHighlighted={highlightCandidate === candidate.id}
                     />
                 ))}
-            </div>
+            </ol>
         </div>
     );
 }
@@ -67,7 +67,7 @@ function CandidateCard({ candidate, rank, isHighlighted }: CandidateCardProps) {
     const isWinner = rank === 1;
 
     return (
-        <div
+        <li
             className={`
         relative rounded-xl p-4 transition-all duration-300
         ${isWinner
@@ -143,6 +143,6 @@ function CandidateCard({ candidate, rank, isHighlighted }: CandidateCardProps) {
                     }}
                 />
             </div>
-        </div>
+        </li>
     );
 }

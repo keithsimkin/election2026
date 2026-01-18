@@ -10,6 +10,9 @@ import { Map as MapIcon, Crown, Building2, BarChart3 } from "lucide-react";
 type ViewMode = "presidential" | "parliamentary";
 type Tab = "map" | "president" | "parliament" | "stats";
 
+import { regions, districts } from "@/data/electionData";
+import { SeoHead } from "@/components/SeoHead";
+
 export function App() {
     const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
     const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
@@ -34,8 +37,36 @@ export function App() {
         setSelectedDistrict(null);
     };
 
+    const getPageTitle = () => {
+        if (selectedDistrict) {
+            const dist = districts.find(d => d.id === selectedDistrict);
+            return dist ? `${dist.name} District Results` : "District Results";
+        }
+        if (selectedRegion) {
+            const reg = regions.find(r => r.id === selectedRegion);
+            return reg ? `${reg.name} Results` : "Region Results";
+        }
+        return "Uganda Elections 2026 Dashboard";
+    };
+
+    const getPageDescription = () => {
+        if (selectedDistrict) {
+            const dist = districts.find(d => d.id === selectedDistrict);
+            return dist ? `Detailed election results for ${dist.name} District, ${dist.region} Region. Winner: ${dist.presidentialWinner}. Turnout: ${dist.turnout}%.` : "District election results.";
+        }
+        if (selectedRegion) {
+            const reg = regions.find(r => r.id === selectedRegion);
+            return reg ? `Election results for ${reg.name}. Total votes: ${reg.totalVotes.toLocaleString()}. Participating districts: ${reg.districts.join(', ')}.` : "Region election results.";
+        }
+        return "Real-time visualization and analytics for the 2026 Uganda Presidential and Parliamentary elections. Explore interactive maps, region-wise data, and live results.";
+    };
+
     return (
         <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-amber-100 selection:text-amber-900">
+            <SeoHead
+                title={getPageTitle()}
+                description={getPageDescription()}
+            />
             {/* Background pattern */}
             <div className="fixed inset-0 pointer-events-none opacity-[0.03]"
                 style={{

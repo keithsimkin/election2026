@@ -95,9 +95,9 @@ export function ParliamentaryResults() {
             </div>
 
             {/* Party breakdown */}
-            <div className="px-6 pb-6 space-y-2">
+            <ul className="px-6 pb-6 space-y-2 list-none m-0">
                 {sortedParties.map((party) => (
-                    <div
+                    <li
                         key={party.party}
                         className="flex items-center gap-3 p-2 bg-slate-50 border border-slate-100 rounded-lg hover:border-slate-200 transition-colors"
                     >
@@ -113,9 +113,9 @@ export function ParliamentaryResults() {
                             <p className="text-slate-900 font-bold text-sm">{party.seats}</p>
                             <p className="text-slate-400 text-[10px]">{((party.seats / totalSeats) * 100).toFixed(1)}%</p>
                         </div>
-                    </div>
+                    </li>
                 ))}
-            </div>
+            </ul>
         </div>
     );
 }
